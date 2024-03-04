@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    username: test
+    password: test
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        search:
+          backend:
+            analysis:
+              configurer: ru.clevertec.comment.search.LuceneConfig
+            directory:
+              root: src\test\resources\db\index
+  liquibase:
+    enabled: true
+    change-log: db/changelog/db.changelog-master-test.yaml
+    contexts: test
