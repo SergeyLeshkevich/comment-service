@@ -1,0 +1,11 @@
+ru.clevertec.comment
+ru.clevertec.comment.aop
+ru.clevertec.comment.config
+ru.clevertec.comment.controller
+ru.clevertec.comment.entity
+ru.clevertec.comment.entity.dto
+ru.clevertec.comment.mapper
+ru.clevertec.comment.repository
+ru.clevertec.comment.search
+ru.clevertec.comment.service
+ru.clevertec.comment.util
