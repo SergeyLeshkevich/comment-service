@@ -10,9 +10,8 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.search.mapper.pojo.automaticindexing.ReindexOnUpdate;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.FullTextField;
@@ -21,11 +20,9 @@ import org.hibernate.search.mapper.pojo.mapping.definition.annotation.IndexedEmb
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.IndexingDependency;
 
 import java.time.LocalDateTime;
-import java.util.Objects;
 
 @Entity
-@Getter
-@Setter
+@Data
 @Builder
 @Indexed
 @NoArgsConstructor
@@ -56,22 +53,4 @@ public class Comment {
 
     @Column(name = "news_id", nullable = false)
     private Long newsId;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Comment comment = (Comment) o;
-        return isArchived == comment.isArchived
-                && Objects.equals(id, comment.id)
-                && Objects.equals(time, comment.time)
-                && Objects.equals(text, comment.text)
-                && Objects.equals(user, comment.user)
-                && Objects.equals(newsId, comment.newsId);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, time, text, user, isArchived, newsId);
-    }
 }

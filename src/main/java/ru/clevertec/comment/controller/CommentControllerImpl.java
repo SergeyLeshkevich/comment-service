@@ -3,8 +3,6 @@ package ru.clevertec.comment.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 import ru.clevertec.comment.entity.dto.CommentRequest;
 import ru.clevertec.comment.entity.dto.CommentResponse;
@@ -15,7 +13,6 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@CrossOrigin                                                                  //TODO
 public class CommentControllerImpl implements CommentController {
 
     private final CommentService service;

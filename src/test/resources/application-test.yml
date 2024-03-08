@@ -16,3 +16,6 @@ spring:
     enabled: true
     change-log: db/changelog/db.changelog-master-test.yaml
     contexts: test
+  cloud:
+    config:
+     enabled: false

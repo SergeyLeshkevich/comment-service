@@ -11,8 +11,8 @@ import java.util.UUID;
  * Repository interface for User entity.
  * This interface extends JpaRepository, providing CRUD operations and a custom query for finding a User by UUID.
  *
- *  * @author Sergey Leshkevich
- *  * @version 1.0
+ * @author Sergey Leshkevich
+ * @version 1.0
  */
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {

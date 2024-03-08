@@ -1,0 +1,54 @@
+spring:
+  data:
+    redis:
+      host: redis
+      port: 6379
+  cloud:
+    config:
+      enabled: false
+  jpa:
+    generate-ddl: 'false'
+    database: postgresql
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        search:
+          backend:
+            analysis:
+              configurer: ru.clevertec.comment.search.LuceneConfig
+            directory:
+              root: src\main\resources\db\index
+  datasource:
+    password: admin
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    url: jdbc:postgresql://localhost:5432/nms_comment_service
+  main:
+    allow-circular-references: true
+server:
+  port: 8085
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+logging:
+  level:
+    org:
+      hibernate:
+        type:
+          descriptor:
+            sql:
+              BasicBinder: TRACE
+        SQL: DEBUG
+
+
+
+aop:
+  logging:
+    enabled: true
+
+exception:
+  handling:
+    enabled: false

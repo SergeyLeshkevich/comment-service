@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import ru.clevertec.comment.entity.dto.CommentRequest;
 import ru.clevertec.comment.entity.dto.CommentResponse;
 import ru.clevertec.comment.util.PaginationResponse;
-import ru.clevertec.exceptionhandlerstarter.model.IncorrectData;
+import ru.clevertec.exceptionhandlerstarter.entity.IncorrectData;
 
 import java.util.List;
 

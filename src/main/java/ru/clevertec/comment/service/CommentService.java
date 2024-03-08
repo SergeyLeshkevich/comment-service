@@ -24,10 +24,12 @@ public interface CommentService {
     CommentResponse update(Long id, CommentRequest commentDto);
 
     PaginationResponse<CommentResponse> getCommentsByIdNews(Long idNews, int pageSize, int numberPage);
+
     PaginationResponse<CommentResponse> getCommentsByIdNewsFromArchive(Long idNews, int pageSize, int numberPage);
 
     void archive(Long id);
 
     void archiveByNewsId(Long newsId);
+
     List<CommentResponse> search(String searchValue,  Integer offset, Integer limit);
 }

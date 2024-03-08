@@ -6,6 +6,9 @@ import org.hibernate.search.engine.search.query.SearchResult;
 import org.hibernate.search.engine.search.sort.dsl.SearchSortFactory;
 import org.hibernate.search.mapper.orm.Search;
 import org.hibernate.search.mapper.orm.session.SearchSession;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -15,7 +18,6 @@ import ru.clevertec.comment.entity.User;
 import ru.clevertec.comment.entity.dto.CommentRequest;
 import ru.clevertec.comment.entity.dto.CommentResponse;
 import ru.clevertec.comment.mapper.CommentMapper;
-import ru.clevertec.comment.mapper.UserMapper;
 import ru.clevertec.comment.repository.CommentRepository;
 import ru.clevertec.comment.util.PaginationResponse;
 import ru.clevertec.exceptionhandlerstarter.exception.EntityNotFoundException;
@@ -54,6 +56,7 @@ public class CommentServiceImpl implements CommentService {
      * @throws EntityNotFoundException if the comment is not found or is archived.
      */
     @Override
+    @Cacheable(value = "api-cache",key = "#id")
     public CommentResponse get(Long id) {
         Optional<Comment> optionalComment = commentRepository.findById(id);
 
@@ -91,6 +94,7 @@ public class CommentServiceImpl implements CommentService {
      * @throws EntityNotFoundException if the archived comment is not found or is not archived.
      */
     @Override
+    @Cacheable(value = "api-cache",key = "#id")
     public CommentResponse getFromArchive(Long id) {
         Optional<Comment> optionalComment = commentRepository.findById(id);
 
@@ -147,6 +151,7 @@ public class CommentServiceImpl implements CommentService {
      */
     @Override
     @Transactional
+    @Cacheable(value = "api-cache",key = "#commentDto.user + #commentDto.text")
     public CommentResponse create(CommentRequest commentDto) {
         Comment comment = commentMapper.toEntity(commentDto);
         User user = userService.getByUuiD(commentDto.user().uuid()).orElse(null);
@@ -172,6 +177,7 @@ public class CommentServiceImpl implements CommentService {
      */
     @Override
     @Transactional
+    @CachePut(value = "api-cache",key = "#id")
     public CommentResponse update(Long id, CommentRequest commentDto) {
         Optional<Comment> optionalComment = commentRepository.findById(id);
 
@@ -191,6 +197,7 @@ public class CommentServiceImpl implements CommentService {
      */
     @Override
     @Transactional
+    @CacheEvict(value = "api-cache",key = "id")
     public void archive(Long id) {
         Comment comment = commentRepository.findById(id).orElseThrow(
                 () -> EntityNotFoundException.of(Comment.class, id)
@@ -260,7 +267,6 @@ public class CommentServiceImpl implements CommentService {
      * @return A List of {@link CommentResponse} objects representing the search results.
      */
     @Override
-    @Transactional(readOnly = true)
     public List<CommentResponse> search(String searchValue, Integer offset, Integer limit) {
         SearchSession searchSession = Search.session(entityManager);
 

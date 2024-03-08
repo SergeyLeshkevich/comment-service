@@ -17,7 +17,7 @@ public interface UserMapper {
     /**
      * Converts UserRequest DTO to User entity.
      *
-     * @param dto UserRequest DTO to be converted.
+     * @param userRequest UserRequest DTO to be converted.
      * @return Corresponding User entity.
      */
     User toEntity(UserRequest userRequest);

@@ -1,12 +1,14 @@
 package ru.clevertec.comment.entity.dto;
 
-import lombok.AllArgsConstructor;
+import jakarta.validation.constraints.NotNull;
 
 import java.util.UUID;
 
 public record UserRequest(
 
+        @NotNull
         UUID uuid,
 
+        @NotNull
         String userName) {
 }
