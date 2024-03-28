@@ -1,8 +1,4 @@
 spring:
-  data:
-    redis:
-      host: redis
-      port: 6379
   cloud:
     config:
       enabled: false
@@ -43,7 +39,9 @@ logging:
               BasicBinder: TRACE
         SQL: DEBUG
 
-
+cache:
+  algorithm: LRU
+  capacity: 6
 
 aop:
   logging:
